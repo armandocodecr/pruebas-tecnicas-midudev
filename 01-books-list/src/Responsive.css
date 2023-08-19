@@ -1,0 +1,88 @@
+@media screen and ( max-width: 1448px ) {
+    .container-section-books > aside > button {
+        font-size: 10px;
+    }
+}
+
+@media screen and ( max-width: 850px ) {
+
+    .container-section-books > aside > div{
+        gap: 10px;
+    }
+
+    /* InputSearch */
+
+    .inputSearch{
+        padding: 7px;
+        font-size: 12px;
+    }
+
+    /* Input range */
+
+    .PB-range-slider::-webkit-slider-thumb {
+        width: 10px;
+        height: 10px;
+      }
+
+    .PB-range-slidervalue {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .PB-range-slider-div{
+        gap: 0.5rem;
+    }
+
+     /* Select genders */
+
+     #genders{
+        padding: 7px;
+        font-size: 12px;
+     }
+}
+
+@media screen and ( max-width: 642px ) {
+
+    .container-section-books{
+        padding-top: 50px;
+    }
+
+    .container-section-books > aside{
+        width: auto;
+    }
+
+    .container-section-books > aside > div{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+}
+
+@media screen and ( max-width: 500px ) {
+
+    nav h1{
+        font-size: 18px;
+    }
+
+    nav button{
+        width: 150px;
+        font-size: 8px;
+        padding: 8px 17px;
+    }
+
+}
+
+@media screen and ( max-width: 400px ) {
+
+    nav h1{
+        font-size: 15px;
+    }
+
+    nav button{
+        width: 120px;
+        font-size: 6px;
+        padding: 6px 15px;
+    }
+
+}
+

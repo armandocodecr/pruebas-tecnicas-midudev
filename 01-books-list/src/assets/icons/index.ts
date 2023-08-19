@@ -1,0 +1,1 @@
+export { LikeIcon } from "./likeIcon";
