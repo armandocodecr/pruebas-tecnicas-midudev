@@ -1,11 +1,6 @@
 import { ChangeEvent, useEffect } from "react";
-import { IBookInterface } from "../interfaces/IBookInterfaces";
 import { useInputStore } from "../store/useInputStore";
 import { useBooksStore } from "../store/useBooksStore";
-
-interface Props {
-  bookInfo: IBookInterface[];
-}
 
 export function GenreSelector() {
 

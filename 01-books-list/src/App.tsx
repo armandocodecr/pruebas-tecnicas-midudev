@@ -31,8 +31,6 @@ function App() {
       {
         <section className="container-section-books">
           <ListsBooks 
-            secctionTitle={title} 
-            textButton={textButton} 
             bookInfo={!isFavoritesUI ? books : favoriteBookStores }
           />
         </section>

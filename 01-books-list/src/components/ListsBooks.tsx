@@ -5,12 +5,10 @@ import { useBooksStore } from "../store/useBooksStore";
 import { useUIStore } from "../store/useUIStore";
 
 interface Props {
-  secctionTitle: string;
-  textButton: string;
   bookInfo: IBookInterface[];
 }
 
-export function ListsBooks({ secctionTitle, textButton, bookInfo }: Props) {
+export function ListsBooks({ bookInfo }: Props) {
   const {
     favoriteBookStores,
     setFavoriteBookStore,
