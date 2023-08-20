@@ -14,7 +14,7 @@ Estas son mi soluciones a las pruebas técnicas de programación para desarrolla
 - [LinkedIn](https://linkedin.com/in/midudev)
 - [Web](https://midu.dev)
 
-## Agradecería mucho que me dejaran su feedback sobre mis soluciones. Pueden hacerme alguna PR explicando alguna mejor solución para cierta código del proyecto.
+## Agradecería mucho que me dejaran su feedback sobre mis soluciones. Pueden hacerme alguna PR explicando alguna mejor solución para cierto código del proyecto.
 ### Estos retos los hago con el fin de mejorar mis habilidades, por lo que es de mucha ayuda sus comentarios o correcciones. ✍️ 
 
 # Un saludo!<img height="80px" src="https://em-content.zobj.net/source/microsoft-teams/337/waving-hand_1f44b.png">
