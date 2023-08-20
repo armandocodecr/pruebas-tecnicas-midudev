@@ -95,7 +95,7 @@ nav button:hover::before {
 }
 
 .container-section-books > aside {
-  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.384);
   border: 1px solid #c0c0c0;
   width: 70%;
   display: flex;
@@ -103,6 +103,7 @@ nav button:hover::before {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  backdrop-filter: blur(5px);
 }
 
 .container-section-books > aside > div {
@@ -167,14 +168,27 @@ nav button:hover::before {
   font-weight: 700;
 }
 
-.frontSide p {
+.frontSide .title {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   background-color: rgba(0, 0, 0, 0.747);
   border-bottom-right-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  padding: 10px 5px;
+  padding: 5px 5px;
   position: absolute;
   bottom: 0;
+}
+
+.frontSide .author{
+  width: 80%;
+  border-top: 1px solid #c0c0c0;
+  font-size: 12px;
+  color: #a7a7a7;
+  padding-top: 5px;
 }
 
 .myCard:hover .innerCard {
@@ -195,7 +209,7 @@ nav button:hover::before {
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 1rem;
   color: white;
-  padding: 0 3px;
+  padding: 0 5px;
   box-shadow: 0 0 0.3em rgba(255, 255, 255, 0.5);
   font-weight: 700;
 }
