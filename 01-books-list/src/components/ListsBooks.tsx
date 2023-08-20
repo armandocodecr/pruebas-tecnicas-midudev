@@ -44,17 +44,18 @@ export function ListsBooks({ bookInfo }: Props) {
 
   return (
     <>
-      <aside>
+      
         {
           !isFavoritesUI && (
-            <div>
-              <InputSearch />
-              <InputRange />
-              <GenreSelector />
-            </div>
+            <aside>
+              <div>
+                <InputSearch />
+                <InputRange />
+                <GenreSelector />
+              </div>
+            </aside>
           )
         }
-      </aside>
       <section className="container-books">
         {bookInfo.map((book_data) => (
           <div key={book_data.book.title} className="myCard">
@@ -77,7 +78,10 @@ export function ListsBooks({ bookInfo }: Props) {
                             }
                           `}
                 </style>
-                <p className="title">{book_data.book.title}</p>
+                <p className="title">
+                  {book_data.book.title}
+                  <p className="author">{book_data.book.author.name}</p>
+                </p>
               </div>
               <div
                 className="backSide"
@@ -87,10 +91,15 @@ export function ListsBooks({ bookInfo }: Props) {
                 }}
               >
                 <p className="title">{book_data.book.synopsis}</p>
-                <LikeIcon
-                  isChecked={book_data.isFavorite!}
-                  onClickFunction={() => onLikedBook(book_data)}
-                />
+                <div 
+                  style={{ width: "90%", display: "flex", justifyContent: "center", alignItems: "center", borderTop: "1px solid #c0c0c0", paddingTop: 10 }}
+                >
+                  <p>{ book_data.book.pages } pages</p>
+                  <LikeIcon
+                    isChecked={book_data.isFavorite!}
+                    onClickFunction={() => onLikedBook(book_data)}
+                  />
+                </div>
               </div>
             </div>
           </div>
