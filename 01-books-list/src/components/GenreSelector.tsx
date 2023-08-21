@@ -1,31 +1,9 @@
-import { ChangeEvent, useEffect } from "react";
-import { useInputStore } from "../store/useInputStore";
-import { useBooksStore } from "../store/useBooksStore";
+import { useBookState, useInputState } from "../hooks";
 
 export function GenreSelector() {
 
-  const { selectGenereValue, setSelectGenereStore } = useInputStore(state => ({
-    selectGenereValue   : state.selectGenereValue,
-    setSelectGenereStore: state.setSelectGenereStore
-  }))
-
-  const { gendersBooks, setGendersBooks, setFilterBooksByGender } = useBooksStore(state => ({
-    gendersBooks          : state.gendersBooks,
-    setGendersBooks       : state.setGendersBooks,
-    setFilterBooksByGender: state.setFilterBooksByGender
-  }))
-
-  const handleSelectChange = ( e: ChangeEvent<HTMLSelectElement> ) => {
-    setSelectGenereStore(e.target.value)
-  }
-
-  useEffect(() => {
-    setGendersBooks()
-  }, [])
-  useEffect(() => {
-    setFilterBooksByGender(selectGenereValue)
-  }, [selectGenereValue])
-  
+  const { selectGenereValue, handleSelectChange } = useInputState()
+  const { gendersBooks } = useBookState()
 
   return (
     <select
