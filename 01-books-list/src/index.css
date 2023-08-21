@@ -264,6 +264,8 @@ nav button:hover::before {
 
 .heart-container {
   --heart-color: rgb(255, 91, 137);
+  display: flex;
+  justify-content: center;
   position: relative;
   width: 25px;
   height: 25px;
