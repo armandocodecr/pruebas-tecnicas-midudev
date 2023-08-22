@@ -4,7 +4,7 @@ import { IBookInterface } from '../interfaces/IBookInterfaces'
 import dataBooks from '../mook/books.json'
 
 interface IBooks{
-    gendersBooks                 : string[]
+    gendersBooks                    : string[]
     bookStore                       : IBookInterface[],
     favoriteBookStores              : IBookInterface[],
     setBookStore                    : (newState : IBookInterface[]) => void,
@@ -17,11 +17,21 @@ interface IBooks{
     setFilterBooksByNameBook        : (bookName : string) => void,
     setFilterBooksByGender          : (genre : string) => void,
 }
+const parseDataBooks: IBookInterface[] = dataBooks.map(books => {
+    const { book, ...rest } = books;
+    const localStorageListBooks = localStorage.getItem('currentListBooks')
+    if(!localStorageListBooks) return books
+    const currArrayList: IBookInterface[] = JSON.parse(localStorageListBooks).state.favoriteBookStores
+
+    return { book: { ...book }, isFavorite: currArrayList ? currArrayList.some(currBook => {
+        return currBook.book.ISBN === books.book.ISBN
+    }) : false } 
+})
 
 export const useBooksStore = create<IBooks>()(
 persist(
     set => ({
-        bookStore: dataBooks,
+        bookStore:  parseDataBooks,
         favoriteBookStores: [],
         gendersBooks: [],
         setBookStore: ( newState : IBookInterface[]) => set(() => ({
@@ -68,14 +78,14 @@ persist(
             }
         }),
         setFilterBooksByNumberPages: ( numberPages : number) => set(() => {
-            const allBooks: IBookInterface[] = dataBooks
+            const allBooks: IBookInterface[] = parseDataBooks
             const newArray: IBookInterface[] = allBooks.filter(books => books.book.pages <= numberPages)
             return {
                 bookStore         : newArray,
             }
         }),
         setFilterBooksByNameBook: ( bookName : string) => set(() => {
-            const allBooks: IBookInterface[] = dataBooks
+            const allBooks: IBookInterface[] = parseDataBooks
             bookName = bookName.toLowerCase()
             const newArray: IBookInterface[] = allBooks.filter(books => books.book.title.toLocaleLowerCase().startsWith(bookName))
             return {
@@ -83,11 +93,11 @@ persist(
             }
         }),
         setFilterBooksByGender: ( genre : string) => set(() => {
-            const allBooks: IBookInterface[] = dataBooks
+            const allBooks: IBookInterface[] = parseDataBooks
             genre = genre.toLowerCase()
             const newArray: IBookInterface[] = allBooks.filter(books => books.book.genre.toLocaleLowerCase().startsWith(genre))
             return {
-                bookStore: newArray.length !== 0 ? newArray : dataBooks
+                bookStore: newArray.length !== 0 ? newArray : parseDataBooks
             }
         }),
     }),
