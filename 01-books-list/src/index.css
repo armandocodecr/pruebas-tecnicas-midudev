@@ -10,7 +10,6 @@
 
 body{
   background-color: #111111;
-  padding-bottom: 100px;
 }
 
 nav{
@@ -438,3 +437,20 @@ nav button:hover::before {
   background-color: #212121;
 }
 
+/* Footer */
+
+footer{
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 75px 0 50px 0;
+  bottom: 0;
+  color: white;
+}
+
+footer img{
+  width: 30px;
+}
