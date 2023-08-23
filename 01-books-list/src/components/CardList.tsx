@@ -33,7 +33,7 @@ export function CardList({ listBooks }: Props) {
                 </style>
                 <p className="title">
                   {listBooks.book.title}
-                  <p className="author">{listBooks.book.author.name}</p>
+                  <span className="author">{listBooks.book.author.name}</span>
                 </p>
               </div>
               <div
