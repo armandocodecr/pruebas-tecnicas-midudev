@@ -8,8 +8,16 @@
   letter-spacing: 2px;
 }
 
+html, body{
+  height: 95%;
+}
+
 body{
   background-color: #111111;
+}
+
+#root {
+  min-height: 95%;
 }
 
 nav{
