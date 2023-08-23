@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { IBookInterface } from "../interfaces/IBookInterfaces";
 import { useBooksStore } from "../store/useBooksStore";
 import { useInputState } from ".";
-
 
 export function useBookState() {
     
@@ -10,7 +9,7 @@ export function useBookState() {
         books, 
         favoriteBookStores, removeFavoriteBookStore,
         dislikeBook,likeBook,gendersBooks,
-        setGendersBooks,setFilterBooksByGender, setFilterBooksByNumberPages,
+        setFilterBooksByNumberPages,
         setFilterBooksByNameBook, setFavoriteBookStore,
       } = useBooksStore((state) => ({
         books                      : state.bookStore,
@@ -20,14 +19,23 @@ export function useBookState() {
         dislikeBook                : state.dislikeBook,
         likeBook                   : state.likeBook,
         gendersBooks               : state.gendersBooks,
-        setGendersBooks            : state.setGendersBooks,
         setFilterBooksByGender     : state.setFilterBooksByGender,
         setFilterBooksByNumberPages: state.setFilterBooksByNumberPages,
-        setFilterBooksByNameBook    : state.setFilterBooksByNameBook
+        setFilterBooksByNameBook   : state.setFilterBooksByNameBook,
+        setBookStore             : state.setBookStore
       }));
 
+      
       const { selectGenereValue, inputTextStore } = useInputState()
       const { inputRangeStore } = useInputState()
+
+      const filteredBooks = useMemo(() => {
+        const booksFilter = selectGenereValue
+          ? books.filter((book) => book.book.genre.toLowerCase().startsWith(selectGenereValue.toLowerCase()))
+          : books;
+        if( booksFilter.length === 0 ) return books
+        return booksFilter
+      }, [books, selectGenereValue]);
 
      const onLikedBook = (currBook: IBookInterface) => {
         const { book } = currBook;
@@ -42,14 +50,6 @@ export function useBookState() {
         likeBook(currBook.book.ISBN);
         setFavoriteBookStore(currBook);
       };
-    
-      useEffect(() => {
-        setGendersBooks()
-      }, [])
-
-      useEffect(() => {
-        setFilterBooksByGender(selectGenereValue)
-      }, [selectGenereValue])
 
       useEffect(() => {
         setFilterBooksByNumberPages(inputRangeStore)
@@ -62,7 +62,7 @@ export function useBookState() {
       return{
         //Variables
         gendersBooks,
-        books,
+        books: filteredBooks,
         favoriteBookStores,
 
         //Methods

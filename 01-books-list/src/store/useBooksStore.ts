@@ -8,7 +8,6 @@ interface IBooks{
     bookStore                       : IBookInterface[],
     favoriteBookStores              : IBookInterface[],
     setBookStore                    : (newState : IBookInterface[]) => void,
-    setGendersBooks                 : () => void,
     setFavoriteBookStore            : (newState : IBookInterface) => void,
     removeFavoriteBookStore         : (id : string) => void,
     likeBook                        : (id : string) => void,
@@ -16,9 +15,10 @@ interface IBooks{
     setFilterBooksByNumberPages     : (numberPages : number) => void,
     setFilterBooksByNameBook        : (bookName : string) => void,
     setFilterBooksByGender          : (genre : string) => void,
+    resetBookStore                  : () => void,
 }
 const parseDataBooks: IBookInterface[] = dataBooks.map(books => {
-    const { book, ...rest } = books;
+    const { book } = books;
     const localStorageListBooks = localStorage.getItem('currentListBooks')
     if(!localStorageListBooks) return books
     const currArrayList: IBookInterface[] = JSON.parse(localStorageListBooks).state.favoriteBookStores
@@ -28,23 +28,19 @@ const parseDataBooks: IBookInterface[] = dataBooks.map(books => {
     }) : false } 
 })
 
+const getGenres = Array.from(
+    new Set(parseDataBooks.map(currBook => currBook.book.genre))
+)
+
 export const useBooksStore = create<IBooks>()(
 persist(
     set => ({
         bookStore:  parseDataBooks,
         favoriteBookStores: [],
-        gendersBooks: [],
+        gendersBooks: getGenres,
         setBookStore: ( newState : IBookInterface[]) => set(() => ({
             bookStore: newState
         })),
-        setGendersBooks: () => set((state) => {
-            const { bookStore } = state
-            const setNoDuplicates = new Set(bookStore.map(books => books.book.genre));
-            const arrayNoDuplicates = [...setNoDuplicates];
-            return {
-                gendersBooks: arrayNoDuplicates
-            }
-        }),
         setFavoriteBookStore: ( newState : IBookInterface) => set(state => {
             const newArray: IBookInterface[] = [ ...state.favoriteBookStores, newState ]
             return {
@@ -87,7 +83,7 @@ persist(
         setFilterBooksByNameBook: ( bookName : string) => set(() => {
             const allBooks: IBookInterface[] = parseDataBooks
             bookName = bookName.toLowerCase()
-            const newArray: IBookInterface[] = allBooks.filter(books => books.book.title.toLocaleLowerCase().startsWith(bookName))
+            const newArray: IBookInterface[] = allBooks.filter(books => books.book.title.toLowerCase().startsWith(bookName))
             return {
                 bookStore: newArray
             }
@@ -95,11 +91,15 @@ persist(
         setFilterBooksByGender: ( genre : string) => set(() => {
             const allBooks: IBookInterface[] = parseDataBooks
             genre = genre.toLowerCase()
-            const newArray: IBookInterface[] = allBooks.filter(books => books.book.genre.toLocaleLowerCase().startsWith(genre))
+            const newArray: IBookInterface[] = allBooks.filter(books => books.book.genre.toLowerCase().startsWith(genre))
+            const filterBooks = newArray.length !== 0 ? newArray : parseDataBooks
             return {
-                bookStore: newArray.length !== 0 ? newArray : parseDataBooks
+                bookStore: filterBooks
             }
         }),
+        resetBookStore: () => set(() => ({
+            bookStore: parseDataBooks
+        })),
     }),
     {
         name: "currentListBooks",

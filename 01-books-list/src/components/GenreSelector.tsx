@@ -11,15 +11,12 @@ export function GenreSelector() {
       onChange={handleSelectChange}
       value={selectGenereValue}
     >
-      <option  selected>
+      <option selected>
         Enter a category
       </option>
       {gendersBooks &&
         gendersBooks.map((gender) => (
-          <option
-            value={gender}
-            key={gender}
-          >
+          <option value={gender} key={gender}>
             {gender}
           </option>
         ))}
