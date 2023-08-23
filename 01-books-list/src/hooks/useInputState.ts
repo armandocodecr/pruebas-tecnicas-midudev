@@ -5,11 +5,11 @@ import { useInputStore } from "../store/useInputStore";
 export function useInputState() {
 
     const { 
-        selectGenereValue, inputRangeStore, inputTextStore,
+        selectGenreValue, inputRangeStore, inputTextStore,
         setInputRangeStore, setInputTextStore, setSelectGenereStore
     } = useInputStore(state => ({
-        selectGenereValue   : state.selectGenereValue,
-        setSelectGenereStore: state.setSelectGenereStore,
+        selectGenreValue   : state.selectGenreValue,
+        setSelectGenereStore: state.setSelectGenreStore,
         inputRangeStore    : state.inputRangeStore,
         setInputRangeStore : state.setInputRangeStore,
         inputTextStore    : state.inputTextStore,
@@ -32,7 +32,7 @@ export function useInputState() {
 
     return {
         //Variables
-        selectGenereValue,
+        selectGenreValue,
         inputRangeStore,
         inputTextStore,
 

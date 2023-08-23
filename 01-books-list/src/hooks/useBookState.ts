@@ -19,23 +19,22 @@ export function useBookState() {
         dislikeBook                : state.dislikeBook,
         likeBook                   : state.likeBook,
         gendersBooks               : state.gendersBooks,
-        setFilterBooksByGender     : state.setFilterBooksByGender,
         setFilterBooksByNumberPages: state.setFilterBooksByNumberPages,
         setFilterBooksByNameBook   : state.setFilterBooksByNameBook,
         setBookStore             : state.setBookStore
       }));
 
       
-      const { selectGenereValue, inputTextStore } = useInputState()
+      const { selectGenreValue, inputTextStore } = useInputState()
       const { inputRangeStore } = useInputState()
 
       const filteredBooks = useMemo(() => {
-        const booksFilter = selectGenereValue
-          ? books.filter((book) => book.book.genre.toLowerCase().startsWith(selectGenereValue.toLowerCase()))
+        const booksFilter = selectGenreValue
+          ? books.filter((book) => book.book.genre.toLowerCase().startsWith(selectGenreValue.toLowerCase()))
           : books;
         if( booksFilter.length === 0 ) return books
         return booksFilter
-      }, [books, selectGenereValue]);
+      }, [books, selectGenreValue]);
 
      const onLikedBook = (currBook: IBookInterface) => {
         const { book } = currBook;

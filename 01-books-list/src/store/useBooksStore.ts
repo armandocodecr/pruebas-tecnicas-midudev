@@ -14,8 +14,6 @@ interface IBooks{
     dislikeBook                     : (id : string) => void,
     setFilterBooksByNumberPages     : (numberPages : number) => void,
     setFilterBooksByNameBook        : (bookName : string) => void,
-    setFilterBooksByGender          : (genre : string) => void,
-    resetBookStore                  : () => void,
 }
 const parseDataBooks: IBookInterface[] = dataBooks.map(books => {
     const { book } = books;
@@ -87,19 +85,7 @@ persist(
             return {
                 bookStore: newArray
             }
-        }),
-        setFilterBooksByGender: ( genre : string) => set(() => {
-            const allBooks: IBookInterface[] = parseDataBooks
-            genre = genre.toLowerCase()
-            const newArray: IBookInterface[] = allBooks.filter(books => books.book.genre.toLowerCase().startsWith(genre))
-            const filterBooks = newArray.length !== 0 ? newArray : parseDataBooks
-            return {
-                bookStore: filterBooks
-            }
-        }),
-        resetBookStore: () => set(() => ({
-            bookStore: parseDataBooks
-        })),
+        })
     }),
     {
         name: "currentListBooks",

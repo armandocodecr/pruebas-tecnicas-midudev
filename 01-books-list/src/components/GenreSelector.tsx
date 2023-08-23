@@ -2,22 +2,22 @@ import { useBookState, useInputState } from "../hooks";
 
 export function GenreSelector() {
 
-  const { selectGenereValue, handleSelectChange } = useInputState()
+  const { selectGenreValue, handleSelectChange } = useInputState()
   const { gendersBooks } = useBookState()
 
   return (
     <select
       id="genders"
       onChange={handleSelectChange}
-      value={selectGenereValue}
+      value={selectGenreValue}
     >
       <option selected>
         Enter a category
       </option>
       {gendersBooks &&
-        gendersBooks.map((gender) => (
-          <option value={gender} key={gender}>
-            {gender}
+        gendersBooks.map((genre) => (
+          <option value={genre} key={genre}>
+            {genre}
           </option>
         ))}
     </select>

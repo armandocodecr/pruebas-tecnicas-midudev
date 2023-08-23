@@ -3,24 +3,24 @@ import { create } from 'zustand'
 interface IInputs{
     inputRangeStore         : number,
     inputTextStore          : string,
-    selectGenereValue       : string,
+    selectGenreValue       : string,
     setInputRangeStore      : (newState : number) => void,
     setInputTextStore       : (newState : string) => void,
-    setSelectGenereStore    : (newState : string) => void,
+    setSelectGenreStore    : (newState : string) => void,
 }
 
 export const useInputStore = create<IInputs>(set => 
 ({
     inputRangeStore: 1200,
     inputTextStore: '',
-    selectGenereValue: 'Select a genere',
+    selectGenreValue: 'Select a genre',
     setInputRangeStore: ( newState : number) => set(() => ({
         inputRangeStore: newState
     })),
     setInputTextStore: ( newState : string) => set(() => ({
         inputTextStore: newState
     })),
-    setSelectGenereStore: ( newState : string) => set(() => ({
-        selectGenereValue: newState
+    setSelectGenreStore: ( newState : string) => set(() => ({
+        selectGenreValue: newState
     })),
 }))
