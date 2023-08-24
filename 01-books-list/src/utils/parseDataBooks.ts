@@ -1,6 +1,6 @@
 import { IBookInterface } from "../interfaces/IBookInterfaces";
 
-export function parseDataBooks(data: IBookInterface[], localStorageData?: IBookInterface[]): Array<IBookInterface> {
+export function parseDataBooks(data: IBookInterface[], localStorageData: IBookInterface[]): Array<IBookInterface> {
     return data.map((books) => {
       const { book } = books;
       if (!localStorageData) return books;
