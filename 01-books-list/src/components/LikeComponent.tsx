@@ -8,7 +8,14 @@ interface Props {
   export function LikeComponent({ isChecked, onClickFunction }: Props) {
     return (
       <div className="heart-container" title="Like">
-        <input type="checkbox" onChange={onClickFunction} checked={isChecked} className="checkbox" id="Give-It-An-Id" />
+        <input 
+          type="checkbox" 
+          onChange={onClickFunction} 
+          checked={isChecked}
+          data-testid="like-checkbox" 
+          className="checkbox" 
+          id="Give-It-An-Id" 
+        />
         <LikeIcon />
       </div>
     );
