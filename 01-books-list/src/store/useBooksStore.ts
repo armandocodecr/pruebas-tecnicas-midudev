@@ -18,7 +18,7 @@ interface IBooks{
 }
 
 const localStorageListBooks = localStorage.getItem('currentListBooks')
-const currFavoriteListBooks: IBookInterface[] = JSON.parse(localStorageListBooks ?? '').state.favoriteBookStores
+const currFavoriteListBooks: IBookInterface[] = localStorageListBooks ? JSON.parse(localStorageListBooks) : [];
 const books = parseDataBooks(dataBooks, currFavoriteListBooks)
 
 const getGenres = Array.from(
