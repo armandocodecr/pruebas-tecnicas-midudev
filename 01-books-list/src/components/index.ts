@@ -1,3 +1,4 @@
+export { Footer } from "./Footer";
 export { CardList } from "./CardList";
 export { GenreSelector } from "./GenreSelector";
 export { InputRange } from "./InputRange";
