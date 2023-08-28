@@ -8,57 +8,60 @@ import { mookDataLocalStorage, mookDefaultData } from "./mook/mookDataBooks";
 
 describe("Test of filteredBooks and parseBooks", () => {
   test("it should parse books based on local storage data", () => {
-    const { state } = mookDataLocalStorage
-    const dataBooks: IBookInterface[] = parseDataBooks(mookDefaultData, state.favoriteBookStores)
-    const dataBooksWithoutFavoriteBooks = parseDataBooks(mookDefaultData)
+    const { state } = mookDataLocalStorage;
+    const dataBooks: IBookInterface[] = parseDataBooks(
+      mookDefaultData,
+      state.favoriteBookStores
+    );
+    const dataBooksWithoutFavoriteBooks = parseDataBooks(mookDefaultData);
 
-    expect(dataBooksWithoutFavoriteBooks).toEqual(mookDefaultData)
-   //👆 Verifies that if we do not pass it a persistent state of the favorite books, it will return the original data.
+    expect(dataBooksWithoutFavoriteBooks).toEqual(mookDefaultData);
+    //👆 Verifies that if we do not pass it a persistent state of the favorite books, it will return the original data.
     expect(dataBooks).toEqual([
-        {
-          book: {
-            title: "El Señor de los Anillos",
-            pages: 1200,
-            genre: "Fantasía",
-            cover:
-              "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg",
-            synopsis:
-              "Una aventura épica en un mundo de fantasía llamado la Tierra Media.",
-            year: 1954,
-            ISBN: "978-0618640157",
-            author: {
-              name: "J.R.R. Tolkien",
-              otherBooks: ["El Hobbit", "El Silmarillion"],
-            },
+      {
+        book: {
+          title: "El Señor de los Anillos",
+          pages: 1200,
+          genre: "Fantasía",
+          cover:
+            "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg",
+          synopsis:
+            "Una aventura épica en un mundo de fantasía llamado la Tierra Media.",
+          year: 1954,
+          ISBN: "978-0618640157",
+          author: {
+            name: "J.R.R. Tolkien",
+            otherBooks: ["El Hobbit", "El Silmarillion"],
           },
-          isFavorite: true
         },
-        {
-          book: {
-            title: "Juego de Tronos",
-            pages: 694,
-            genre: "Fantasía",
-            cover:
-              "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1273763400i/8189620.jpg",
-            synopsis:
-              "En un reino donde las estaciones duran años, una batalla épica por el trono se desarrolla.",
-            year: 1996,
-            ISBN: "978-0553103540",
-            author: {
-              name: "George R. R. Martin",
-              otherBooks: [
-                "Choque de Reyes",
-                "Tormenta de Espadas",
-                "Festín de Cuervos",
-              ],
-            },
+        isFavorite: true,
+      },
+      {
+        book: {
+          title: "Juego de Tronos",
+          pages: 694,
+          genre: "Fantasía",
+          cover:
+            "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1273763400i/8189620.jpg",
+          synopsis:
+            "En un reino donde las estaciones duran años, una batalla épica por el trono se desarrolla.",
+          year: 1996,
+          ISBN: "978-0553103540",
+          author: {
+            name: "George R. R. Martin",
+            otherBooks: [
+              "Choque de Reyes",
+              "Tormenta de Espadas",
+              "Festín de Cuervos",
+            ],
           },
-          isFavorite: false
         },
-      ])
+        isFavorite: false,
+      },
+    ]);
   });
 
-  test("should return the filter books correctly", () => {
+  test("should return the filter books by genre correctly", () => {
     const selectGenreValue = "Zombies";
     const books = parseDataBooks(dataBooks);
     const { result } = renderHook(() =>
@@ -92,6 +95,51 @@ describe("Test of filteredBooks and parseBooks", () => {
             otherBooks: [],
           },
         },
+      },
+    ]);
+  });
+
+  test("should return the filter books by name correctly", () => {
+    const inputValue = "El".toLowerCase();
+    const books = parseDataBooks(dataBooks);
+    const newArray: IBookInterface[] = books.filter((books) =>
+      books.book.title.toLowerCase().startsWith(inputValue)
+    );
+
+    expect(newArray).toEqual([
+      {
+        book: {
+          title: "El Señor de los Anillos",
+          pages: 1200,
+          genre: "Fantasía",
+          cover:
+            "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg",
+          synopsis:
+            "Una aventura épica en un mundo de fantasía llamado la Tierra Media.",
+          year: 1954,
+          ISBN: "978-0618640157",
+          author: {
+            name: "J.R.R. Tolkien",
+            otherBooks: ["El Hobbit", "El Silmarillion"],
+          },
+        }
+      },
+      {
+        book: {
+          title: "El resplandor",
+          pages: 688,
+          genre: "Terror",
+          cover:
+            "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1641398308i/60038757.jpg",
+          synopsis:
+            "Una familia se muda a un hotel aislado para el invierno donde una presencia siniestra influye en el padre hacia la violencia.",
+          year: 1977,
+          ISBN: "978-0307743657",
+          author: {
+            name: "Stephen King",
+            otherBooks: ["Carrie", "It"],
+          },
+        }
       },
     ]);
   });

@@ -20,7 +20,9 @@ describe('Test to LikeComponent', () => {
         const { getByTestId  } = render(<LikeComponent isChecked={isLiked} onClickFunction={onChangeLiked} />)
         const inputSearchElement = getByTestId('like-checkbox') as HTMLInputElement;
         fireEvent.change(inputSearchElement, { target: { checked: true } }) 
+        fireEvent.change(inputSearchElement, onChangeLiked()) 
 
+        expect(isLiked).toBe(true)
         expect(inputSearchElement.checked).toBe(true)
 
     })

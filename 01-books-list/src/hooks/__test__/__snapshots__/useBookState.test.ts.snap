@@ -148,6 +148,46 @@ exports[`Test of filteredBooks and parseBooks > it should return the information
 ]
 `;
 
+exports[`Test of filteredBooks and parseBooks > should return the filter books by genre correctly 1`] = `
+[
+  {
+    "book": {
+      "ISBN": "978-4444532611",
+      "author": {
+        "name": "Manel Loreiro",
+        "otherBooks": [],
+      },
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1422626176i/24762432.jpg",
+      "genre": "Zombies",
+      "pages": 444,
+      "synopsis": "Un gallego se queda en casa en pleno apocalipsis zombie y acaba casi salvando el mundo",
+      "title": "Apocalipsis Zombie",
+      "year": 2001,
+    },
+  },
+]
+`;
+
+exports[`Test of filteredBooks and parseBooks > should return the filter books by name correctly 1`] = `
+[
+  {
+    "book": {
+      "ISBN": "978-4444532611",
+      "author": {
+        "name": "Manel Loreiro",
+        "otherBooks": [],
+      },
+      "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1422626176i/24762432.jpg",
+      "genre": "Zombies",
+      "pages": 444,
+      "synopsis": "Un gallego se queda en casa en pleno apocalipsis zombie y acaba casi salvando el mundo",
+      "title": "Apocalipsis Zombie",
+      "year": 2001,
+    },
+  },
+]
+`;
+
 exports[`Test of filteredBooks and parseBooks > should return the filter books correctly 1`] = `
 [
   {
