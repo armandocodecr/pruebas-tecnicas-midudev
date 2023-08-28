@@ -3,15 +3,16 @@ import { IBookInterface } from "../interfaces/IBookInterfaces";
 import { LikeComponent } from "./LikeComponent";
 
 interface Props{
-    listBooks: IBookInterface
+    listBooks         : IBookInterface,
+    data_aos_animation: string,
 }
 
-export function CardList({ listBooks }: Props) {
+export function CardList({ listBooks, data_aos_animation }: Props) {
 
     const { onLikedBook } = useBookState()
-
+    
     return(
-        <div key={listBooks.book.title} className="myCard">
+        <div key={listBooks.book.title} className="myCard" data-aos={data_aos_animation}>
             <div className="innerCard">
               <div
                 className={`frontSide Es${listBooks.book.title
